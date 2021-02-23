@@ -22,7 +22,7 @@ var initDemo = function () {
     console.log('This is working')
 
     var canvas = document.getElementById('game-surface')
-    canvas.width = 800
+    canvas.width = 600
     canvas.height = 600
     var gl = canvas.getContext('webgl')
 

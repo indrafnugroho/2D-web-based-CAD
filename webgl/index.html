@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="container">
+			<h2>Web 2D CAD</h2>
+			<canvas width = "500" height = "500" id = "my_Canvas"></canvas>
+		</div>
+		<div class="input-group">
+			<img id="line" src="line.svg" onclick='lineClick()' alt="line">
+			<img id="square" src="square.svg" onclick='squareClick()'alt="square"><br/>
+			<input onchange="loadRange()" type="range" id="range" name="points" min="0" max="100">
+		</div>
+		<script src="app.js"></script>
+		<script src="webgl_square.js"></script>
+		<script src="webgl_line.js"></script>
+	</body>
+</html>
