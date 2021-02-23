@@ -1,4 +1,4 @@
-function loadSquare(x){
+function loadSquare(x, y, r){
    /*============ Creating a canvas =================*/
 
    var canvas = document.getElementById('my_Canvas');
@@ -9,10 +9,10 @@ function loadSquare(x){
    /*========== Defining and storing the geometry =========*/
 
    var vertices = [
-      -x,x,0.0,
-      -x,-x,0.0,
-      x,-x,0.0,
-      x,x,0.0 
+      -r + x,r + y,0.0,
+      -r + x,-r + y,0.0,
+      r + x,-r + y,0.0,
+      r + x,r + y,0.0 
    ];
 
    indices = [3,2,1,3,1,0];

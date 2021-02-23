@@ -1,4 +1,4 @@
-function loadLine(x){
+function loadLine(x, y, r){
    /*======= Creating a canvas =========*/
 
    var canvas = document.getElementById('my_Canvas');
@@ -7,8 +7,8 @@ function loadLine(x){
    /*======= Defining and storing the geometry ======*/
 
    var vertices = [
-      0,0,0,
-      x,0,0
+      x,y,0,
+      r+x,y,0
    ]
 
    // Create an empty buffer object
