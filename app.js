@@ -139,6 +139,8 @@ var render = function(x, y) {
         drawPolygon(x, y)
     } else if (isLine) {
        drawLine(x, y)
+    } else if (isSquare) {
+        drawSquare(x, y)
     }
 }
 
