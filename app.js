@@ -99,14 +99,14 @@ var load = function() {
 		alert('Your browser does not support WebGL');
 	}
 
-    gl.clearColor(0.75, 0.85, 0.8, 1.0)
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+    // gl.clearColor(0.75, 0.85, 0.8, 1.0)
+    // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 }
 
 var main = function (vertices, n, method) {
     console.log('This is working')
-    gl.clearColor(0.75, 0.85, 0.8, 1.0)
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+    // gl.clearColor(0.75, 0.85, 0.8, 1.0)
+    // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
     // Create Shaders
     var vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderText)
@@ -114,18 +114,6 @@ var main = function (vertices, n, method) {
 
     // Create program
     var program = createProgram(vertexShader, fragmentShader)
-    
-    // Create Buffer
-    // var triangleVertices = [
-    // //  X,   Y,      R,   G,   B
-    //     -0.5, 0.5,   1.0, 1.0, 0.0,
-    //     0.5, -0.5,  0.1, 1.0, 0.6,
-    //     0.5, 0.5, 0.7, 0.0, 1.0,
-        
-        
-    //     -0.5, -0.5, 1.0, 1.0, 0.5,
-    //     0.7, 0.0, 0.5, 0.0, 0.8
-    // ]
 
     drawObject(program, vertices, method, n)
 }
@@ -149,6 +137,14 @@ canvas.addEventListener('mousedown', function(e) {
 var render = function(x, y) {
     if (isPolygon) {
         drawPolygon(x, y)
+    } else if (isLine) {
+       drawLine(x, y)
+    }
+}
+
+var renderAll = function() {
+    for (var i=0; i<arrObjects.length; i++) {
+        main(arrObjects[i].vert, arrObjects[i].n, arrObjects[i].meth)
     }
 }
 

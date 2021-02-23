@@ -1,3 +1,7 @@
 .center {
     text-align: center;
 }
+
+#canvas-surface {
+    background-color: rgba(191.25, 216.75, 204, 1.0);
+}

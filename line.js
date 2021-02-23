@@ -1,19 +1,11 @@
-var n_poly = 1
-var n_after = 0
-
-var changeNPoly = function() {
-    n_poly = document.getElementById("n-poly").value
-    // console.log(n_poly)
-}
-
-var setPolygon = function() {
-    isLine = false
+var setLine = function() {
+    isLine = true
     isSquare = false
-    isPolygon = true
+    isPolygon = false
 }
 
-var drawPolygon = function(x, y) {
-    if (n_after < n_poly) {
+var drawLine = function(x, y) {
+    if (n_after < 2) {
         vertices.push(x)
         vertices.push(y)
         vertices.push(rgb[0]/255)
@@ -22,19 +14,18 @@ var drawPolygon = function(x, y) {
         n_after++
         // console.log(vertices)
         renderAll()
-        main(vertices, n_after, gl.TRIANGLE_FAN)
+        main(vertices, n_after, gl.LINES)
     }
 
-    if (n_after == n_poly) {
+    if (n_after == 2) {
         console.log("masuk sini")
         arrObjects.push({
             vert: vertices,
-            meth: gl.TRIANGLE_FAN,
+            meth: gl.LINES,
             n: n_after
         })
         vertices = []
         n_after = 0
-        isPolygon = false
+        isLine = false
     }
 }
-
