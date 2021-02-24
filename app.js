@@ -122,15 +122,25 @@ var y = 0
 var width = document.getElementById('canvas-surface').width
 var height = document.getElementById('canvas-surface').height
 
-var selectedObject = null
+var selectedObject
+var idxPoint
+var isDrag = false
 
-canvas.addEventListener('mousedown', function(e) {
+canvas.addEventListener("mousedown", function(e) {
     x = getXCursorPosition(canvas, e)
     y = getYCursorPosition(canvas, e)   
     // console.log('x : '+ x + ' y : ' + y)
     checkSelectedObject(x, y)
-
     render(x, y)
+
+    if (selectedObject != null) {
+        isDrag = true
+        canvas.addEventListener("mouseup", (event) => changeObjectPoint(canvas, event))
+
+        if(!isDrag) {
+            canvas.removeEventListener("mouseup", (event) => changeObjectPoint(canvas, event))
+        }
+    }
 })
 
 var render = function(x, y) {
@@ -178,8 +188,10 @@ var getYCursorPosition  = function(canvas, event) {
 
 var checkSelectedObject = function(x, y) {
     selectedObject = null
+    idxPoint = -1
+
     arrObjects.forEach(function (item) {
-        item.p.forEach(function (item2) {
+        item.p.forEach(function (item2, idx) {
             // console.log("item2")
             // console.log(item2)
             if (x > item2[0] && y < item2[1] &&
@@ -187,11 +199,29 @@ var checkSelectedObject = function(x, y) {
                 x < item2[10] && y > item2[11] &&
                 x > item2[15] && y > item2[16]) {
                 selectedObject = item
-                console.log("object selected")
+                idxPoint = idx
+                console.log("object selected with idx " + idx)
                 }
         })
     })
     // console.log(selectedObject)
+}
+
+var changeObjectPoint = function(canvas, ev) {
+    // console.log("masuk sini ga nih")
+    if (isDrag) {
+        x = getXCursorPosition(canvas, ev)
+        y = getYCursorPosition(canvas, ev)
+        
+        // change vertices point
+        selectedObject.vert[idxPoint*5] = x
+        selectedObject.vert[idxPoint*5 + 1] = y
+
+        // change square point
+        selectedObject.p[idxPoint] = getSquarePoint(x, y)
+        renderAll()
+        isDrag = false
+    }
 }
 
 var vertices = []

@@ -35,7 +35,8 @@ var drawPolygon = function(x, y) {
             vert: vertices,
             meth: gl.TRIANGLE_FAN,
             n: n_after,
-            p: points
+            p: points,
+            type: "polygon"
         })
         vertices = []
         n_after = 0

@@ -28,7 +28,8 @@ var drawLine = function(x, y) {
             vert: vertices,
             meth: gl.LINES,
             n: n_after,
-            p: points
+            p: points,
+            type: "line"
         })
         vertices = []
         n_after = 0

@@ -25,7 +25,8 @@ var drawSquare = function(x, y) {
         vert: vertices,
         meth: gl.TRIANGLE_FAN,
         n: 4,
-        p: points
+        p: points,
+        type: "square"
     })
     vertices = []
     isSquare = false
