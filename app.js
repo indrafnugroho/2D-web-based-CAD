@@ -98,15 +98,10 @@ var load = function() {
 	if (!gl) {
 		alert('Your browser does not support WebGL');
 	}
-
-    // gl.clearColor(0.75, 0.85, 0.8, 1.0)
-    // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 }
 
 var main = function (vertices, n, method) {
-    console.log('This is working')
-    // gl.clearColor(0.75, 0.85, 0.8, 1.0)
-    // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+    // console.log('This is working')
 
     // Create Shaders
     var vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderText)
@@ -127,10 +122,14 @@ var y = 0
 var width = document.getElementById('canvas-surface').width
 var height = document.getElementById('canvas-surface').height
 
+var selectedObject = null
+
 canvas.addEventListener('mousedown', function(e) {
     x = getXCursorPosition(canvas, e)
     y = getYCursorPosition(canvas, e)   
-    console.log('x : '+ x + ' y : ' + y)
+    // console.log('x : '+ x + ' y : ' + y)
+    checkSelectedObject(x, y)
+
     render(x, y)
 })
 
@@ -151,9 +150,8 @@ var renderObject = function(vertices, n, method) {
         main(sq_point, 4, gl.TRIANGLE_FAN)
         points.push(sq_point)
     }
-    // points = []
-    console.log("render object")
-    console.log(points)
+    // console.log("render object")
+    // console.log(points)
 }
 
 var renderAll = function() {
@@ -178,6 +176,24 @@ var getYCursorPosition  = function(canvas, event) {
     return (y - height/2)/ (height/2) * -1;
 }
 
+var checkSelectedObject = function(x, y) {
+    selectedObject = null
+    arrObjects.forEach(function (item) {
+        item.p.forEach(function (item2) {
+            // console.log("item2")
+            // console.log(item2)
+            if (x > item2[0] && y < item2[1] &&
+                x < item2[5] && y < item2[6] &&
+                x < item2[10] && y > item2[11] &&
+                x > item2[15] && y > item2[16]) {
+                selectedObject = item
+                console.log("object selected")
+                }
+        })
+    })
+    // console.log(selectedObject)
+}
+
 var vertices = []
 var rgb = [0.0, 0.0, 0.0]
 
@@ -193,6 +209,15 @@ var getColor = function() {
     var hex = document.getElementById("color_picker").value
     rgb = hexToRgb(hex)
     // console.log("color " + rgb[0])
+
+    if (selectedObject != null) {
+        for (var i=2; i<selectedObject.vert.length; i+=5) {
+            selectedObject.vert[i] = rgb[0]/255
+            selectedObject.vert[i+1] = rgb[1]/255
+            selectedObject.vert[i+2] = rgb[2]/255
+        }
+    }
+    renderAll()
 }
 
 var exportFile = function() {
