@@ -224,7 +224,7 @@ var exportFile = function() {
     var filename = document.getElementById("export_file").value
 
     if (!filename) {
-        filename = 'CADdata'
+        filename = 'data'
     }
 
     var data = JSON.stringify(arrObjects);
@@ -236,29 +236,30 @@ var exportFile = function() {
 var importFile = function() {
     var file = document.getElementById("import_file").files[0]
     var reader = new FileReader();
-    var data = [];
+    // var data = [];
     reader.onload = function(e){
-        console.log('data diload')
-        data = JSON.parse(e.target.result);
-        console.log(data)
-        // Lanjut olah data buat nampilin(?)
-        // Gimana loadnya >.<
+        console.log('file imported')
+        arrObjects = JSON.parse(e.target.result);
+        // console.log(data)
+        // arrObjects = data
+        renderAll()
     }
+    
     reader.readAsText(file);
     if (!file) {
-        alert('File Kosong')
+        alert('Blank file')
     }
 }
 
 var download = function(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
+    var element = document.createElement('a')
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
+    element.setAttribute('download', filename)
 
-  element.style.display = 'none';
-  document.body.appendChild(element);
+    element.style.display = 'none'
+    document.body.appendChild(element)
 
-  element.click();
+    element.click()
 
-  document.body.removeChild(element);
+    document.body.removeChild(element)
 }
