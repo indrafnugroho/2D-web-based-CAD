@@ -199,14 +199,41 @@ var exportFile = function() {
     var filename = document.getElementById("export_file").value
 
     if (!filename) {
-        
+        filename = 'CADdata'
     }
+
+    var data = JSON.stringify(arrObjects);
+    download(filename + ".json", data);
+
+    console.log("The file was saved!"); 
 }
 
 var importFile = function() {
-    var filename = document.getElementById("import_file").value
-
-    if (!filename) {
-        
+    var file = document.getElementById("import_file").files[0]
+    var reader = new FileReader();
+    var data = [];
+    reader.onload = function(e){
+        console.log('data diload')
+        data = JSON.parse(e.target.result);
+        console.log(data)
+        // Lanjut olah data buat nampilin(?)
+        // Gimana loadnya >.<
     }
+    reader.readAsText(file);
+    if (!file) {
+        alert('File Kosong')
+    }
+}
+
+var download = function(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
 }
