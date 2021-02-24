@@ -129,7 +129,7 @@ var isDrag = false
 canvas.addEventListener("mousedown", function(e) {
     x = getXCursorPosition(canvas, e)
     y = getYCursorPosition(canvas, e)   
-    console.log('x : '+ x + ' y : ' + y)
+    // console.log('x : '+ x + ' y : ' + y)
     checkSelectedObject(x, y)
     render(x, y)
 
@@ -297,7 +297,6 @@ var download = function(filename, text) {
 
     document.body.removeChild(element)
 }
-
 
 var help = document.getElementById("help");
 var btn = document.getElementById("helpBtn");
