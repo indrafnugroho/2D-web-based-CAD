@@ -4,17 +4,8 @@ var setSquare = function() {
     isPolygon = false
 }
 
-var drawSquare = function(x, y) {
-    var s = 0.2 // value between 0 and 2
-    var x2 = x + s
-    var y2 = y - s
-    
-    vertices = [
-        x, y, rgb[0]/255, rgb[1]/255, rgb[2]/255,
-        x2, y, rgb[0]/255, rgb[1]/255, rgb[2]/255,
-        x2, y2, rgb[0]/255, rgb[1]/255, rgb[2]/255,
-        x, y2, rgb[0]/255, rgb[1]/255, rgb[2]/255
-    ]
+var drawSquare = function(c1, c2, s=0.2) {
+    vertices = getSquareVertices(c1, c2, s)
     
     // console.log(vertices)
     renderAll()
@@ -33,6 +24,20 @@ var drawSquare = function(x, y) {
     points = []
 }
 
+var getSquareVertices = function(c1, c2, s) {
+    var x = c1 - s/2
+    var y = c2 + s/2
+    var x2 = x + s
+    var y2 = y - s
+    
+    return [
+        x, y, rgb[0]/255, rgb[1]/255, rgb[2]/255,
+        x2, y, rgb[0]/255, rgb[1]/255, rgb[2]/255,
+        x2, y2, rgb[0]/255, rgb[1]/255, rgb[2]/255,
+        x, y2, rgb[0]/255, rgb[1]/255, rgb[2]/255
+    ]
+}
+
 var points = []
 
 var getSquarePoint = function(x, y) {
@@ -42,4 +47,25 @@ var getSquarePoint = function(x, y) {
         x+0.025, y-0.025, 1.0, 1.0, 1.0,
         x-0.025, y-0.025, 1.0, 1.0, 1.0
     ]
+}
+
+var getCenterSquare = function() {
+    var cx = selectedObject.vert[0] + selectedObject.vert[5]
+    var cy = selectedObject.vert[1] + selectedObject.vert[16]
+    return [cx/2, cy/2]
+}
+
+var scaleSquare = function(newx, newy) {
+    var center = getCenterSquare()
+    var x_diff = Math.abs(newx - center[0])
+    var y_diff = Math.abs(newy - center[1])
+    var s = Math.max(x_diff, y_diff) * 2
+
+    selectedObject.vert = getSquareVertices(center[0], center[1], s)
+    var pts = []
+    for (var i=0; i<selectedObject.vert.length; i+=5) {
+        var sq_point = getSquarePoint(selectedObject.vert[i], selectedObject.vert[i+1])
+        pts.push(sq_point)
+    }
+    selectedObject.p = pts
 }

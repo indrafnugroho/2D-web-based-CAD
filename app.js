@@ -129,7 +129,7 @@ var isDrag = false
 canvas.addEventListener("mousedown", function(e) {
     x = getXCursorPosition(canvas, e)
     y = getYCursorPosition(canvas, e)   
-    // console.log('x : '+ x + ' y : ' + y)
+    console.log('x : '+ x + ' y : ' + y)
     checkSelectedObject(x, y)
     render(x, y)
 
@@ -209,16 +209,20 @@ var checkSelectedObject = function(x, y) {
 
 var changeObjectPoint = function(canvas, ev) {
     // console.log("masuk sini ga nih")
-    if (isDrag) {
-        x = getXCursorPosition(canvas, ev)
-        y = getYCursorPosition(canvas, ev)
+    x = getXCursorPosition(canvas, ev)
+    y = getYCursorPosition(canvas, ev)
         
+    if (isDrag && selectedObject.type != "square") {
         // change vertices point
         selectedObject.vert[idxPoint*5] = x
         selectedObject.vert[idxPoint*5 + 1] = y
 
         // change square point
         selectedObject.p[idxPoint] = getSquarePoint(x, y)
+        renderAll()
+        isDrag = false
+    } else if (isDrag && selectedObject.type == "square") {
+        scaleSquare(x, y)
         renderAll()
         isDrag = false
     }
