@@ -293,3 +293,22 @@ var download = function(filename, text) {
 
     document.body.removeChild(element)
 }
+
+
+var help = document.getElementById("help");
+var btn = document.getElementById("helpBtn");
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    help.style.display = "block";
+}
+
+span.onclick = function() {
+    help.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == help) {
+        help.style.display = "none";
+    }
+} 
