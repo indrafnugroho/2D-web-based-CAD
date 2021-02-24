@@ -26,6 +26,41 @@
             <input type="file" id="import_file" accept=".json">
             <input type="button" value="Import" onclick="importFile()">
         </section>
+        <section class="center">
+            Kalo bingung pencet ->
+            <button id="helpBtn">Help</button>
+        </section>
+        <div id="help" class="help">
+            
+            <!-- Modal content -->
+            <div class="help-content">
+                <span class="close">&times;</span>
+                <h2>Menggambar Garis</h2>
+                <p> 1. Klik tombol Line <br/>
+                    2. Pilih dua koordinat pada canvas
+                </p>
+                
+                <h2>Menggambar Kotak</h2>
+                <p>
+                    1. Klik tombol Square<br/>
+                    2. Pilih satu koordinat pada canvas sebagai titik pusat
+                </p>
+                
+                <h2>Menggambar Polygon</h2>
+                <p>
+                    1. Klik tombol polygon<br/>
+                    2. Atur jumlah sisi yang ingin dibuat sebanyak n <br/>
+                    3. Pilih N buah koordinat pada canvas
+                </p>
+                
+                <h2>Mengganti Warna Objek</h2>
+                <p>
+                    1. Pilih satu titik dari objek yang akan diganti warnanya<br/>
+                    2. Ubah pengaturan warna pada input warna
+                </p>
+            </div>
+            
+        </div>
         <script src="app.js"></script>
         <script src="polygon.js"></script>
         <script src="line.js"></script>
