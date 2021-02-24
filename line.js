@@ -14,18 +14,25 @@ var drawLine = function(x, y) {
         n_after++
         // console.log(vertices)
         renderAll()
-        main(vertices, n_after, gl.LINES)
+        if (n_after < 2) {
+            main(vertices, n_after, gl.LINES)
+        } else {
+            renderObject(vertices, n_after, gl.LINES)
+        }
     }
 
     if (n_after == 2) {
         console.log("masuk sini")
+        console.log(points)
         arrObjects.push({
             vert: vertices,
             meth: gl.LINES,
-            n: n_after
+            n: n_after,
+            p: points
         })
         vertices = []
         n_after = 0
         isLine = false
+        points = []
     }
 }

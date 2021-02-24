@@ -144,9 +144,25 @@ var render = function(x, y) {
     }
 }
 
+var renderObject = function(vertices, n, method) {
+    main(vertices, n, method)
+    for (var i=0; i<vertices.length; i+=5) {
+        var sq_point = getSquarePoint(vertices[i], vertices[i+1])
+        main(sq_point, 4, gl.TRIANGLE_FAN)
+        points.push(sq_point)
+    }
+    // points = []
+    console.log("render object")
+    console.log(points)
+}
+
 var renderAll = function() {
     for (var i=0; i<arrObjects.length; i++) {
         main(arrObjects[i].vert, arrObjects[i].n, arrObjects[i].meth)
+        // render square points of object
+        for (var j=0; j<arrObjects[i].n; j++) {
+            main(arrObjects[i].p[j], 4, gl.TRIANGLE_FAN)
+        }
     }
 }
 
@@ -177,4 +193,20 @@ var getColor = function() {
     var hex = document.getElementById("color_picker").value
     rgb = hexToRgb(hex)
     // console.log("color " + rgb[0])
+}
+
+var exportFile = function() {
+    var filename = document.getElementById("export_file").value
+
+    if (!filename) {
+        
+    }
+}
+
+var importFile = function() {
+    var filename = document.getElementById("import_file").value
+
+    if (!filename) {
+        
+    }
 }

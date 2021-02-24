@@ -22,7 +22,11 @@ var drawPolygon = function(x, y) {
         n_after++
         // console.log(vertices)
         renderAll()
-        main(vertices, n_after, gl.TRIANGLE_FAN)
+        if (n_after < n_poly) {
+            main(vertices, n_after, gl.TRIANGLE_FAN)
+        } else {
+            renderObject(vertices, n_after, gl.TRIANGLE_FAN)
+        }
     }
 
     if (n_after == n_poly) {
@@ -30,11 +34,13 @@ var drawPolygon = function(x, y) {
         arrObjects.push({
             vert: vertices,
             meth: gl.TRIANGLE_FAN,
-            n: n_after
+            n: n_after,
+            p: points
         })
         vertices = []
         n_after = 0
         isPolygon = false
+        points = []
     }
 }
 

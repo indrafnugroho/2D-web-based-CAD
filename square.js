@@ -18,14 +18,27 @@ var drawSquare = function(x, y) {
     
     // console.log(vertices)
     renderAll()
-    main(vertices, 4, gl.TRIANGLE_FAN)
+    renderObject(vertices, 4, gl.TRIANGLE_FAN)
 
     console.log("masuk sini")
     arrObjects.push({
         vert: vertices,
         meth: gl.TRIANGLE_FAN,
-        n: 4
+        n: 4,
+        p: points
     })
     vertices = []
     isSquare = false
+    points = []
+}
+
+var points = []
+
+var getSquarePoint = function(x, y) {
+    return [
+        x-0.025, y+0.025, 1.0, 1.0, 1.0,
+        x+0.025, y+0.025, 1.0, 1.0, 1.0,
+        x+0.025, y-0.025, 1.0, 1.0, 1.0,
+        x-0.025, y-0.025, 1.0, 1.0, 1.0
+    ]
 }

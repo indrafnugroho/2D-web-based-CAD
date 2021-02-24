@@ -20,6 +20,12 @@
             <input type="color" id="color_picker" onchange="getColor()">
         </section>
         <p class="center"><i>The contents is right above this text</i></p>
+        <section class="center">
+            <input type="text" id="export_file" placeholder="filename.json">
+            <input type="button" value="Export" onclick="exportFile()">
+            <input type="text" id="import_file" placeholder="filename.json">
+            <input type="button" value="Import" onclick="importFile()">
+        </section>
         <script src="app.js"></script>
         <script src="polygon.js"></script>
         <script src="line.js"></script>
